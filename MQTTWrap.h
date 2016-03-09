@@ -43,14 +43,14 @@ public:
     void connect();
     void disconnect();
 
-    void setLastWillTestament(const char* topic, const char* payload,  uint8_t will_qos, uint8_t will_retain);
+    void setLastWillTestament(const char* topic, const char* payload, uint8_t will_qos, uint8_t will_retain);
     void setLastWillTestament(String& topic, String& payload, uint8_t qill_qos, uint8_t will_retain);
 
     bool subscribe(const char* topic, uint8_t qos);
     bool subscribe(String& topic, uint8_t qos);
 
-    bool publish(const char* topic, const char* data, int data_length, int qos, int retain);
-    bool publish(String& topic, String& payload, int qos, int retain);
+    bool publish(const char* topic, const char* data, int data_length, uint8_t qos, uint8_t retain);
+    bool publish(String& topic, String& payload, uint8_t qos, uint8_t retain);
 
     bool isConnected();
 };

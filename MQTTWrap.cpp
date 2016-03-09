@@ -94,12 +94,12 @@ bool MQTTWrap::subscribe(String& topic, uint8_t qos)
     return subscribe(topic.c_str(), qos);
 }
 
-bool MQTTWrap::publish(const char* topic, const char* payload, int data_length, int qos, int retain)
+bool MQTTWrap::publish(const char* topic, const char* payload, int data_length, uint8_t qos, uint8_t retain)
 {
     return MQTT_Publish(&MQTTWrap::mqttClient, topic, payload, data_length, qos, retain);
 }
 
-bool MQTTWrap::publish(String& topic, String& payload, int qos, int retain)
+bool MQTTWrap::publish(String& topic, String& payload, uint8_t qos, uint8_t retain)
 {
     return publish(topic.c_str(), payload.c_str(), payload.length(), qos, retain);
 }
