@@ -1,21 +1,18 @@
 #include "MQTTClient.h"
 
 
-MQTT_Client MQTTClient::mqttClient;
-MQTTClient* MQTTClient::instance = 0;
-
 MQTTClient::MQTTClient(const char* device_id, const char* host, const char* user, const char* pass, uint32_t port, uint32_t keep_alive)
 {
-    MQTT_InitConnection(&MQTTClient::mqttClient, host, port, 0);
+    MQTT_InitConnection(mqttClient, (uint8t*)host, port, 0);
 
-    MQTT_InitClient(&MQTTClient::mqttClient, device_id, user, pass, keep_alive, 1);
+    MQTT_InitClient(mqttClient, (uint8t*)device_id, (uint8t*)user, (uint8t*)pass, keep_alive, 1);
 
-    MQTT_OnConnected(&MQTTClient::mqttClient, MQTTClient::onConnectedStatic);
-    MQTT_OnDisconnected(&MQTTClient::mqttClient, MQTTClient::onDisconnectedStatic);
-    MQTT_OnPublished(&MQTTClient::mqttClient, MQTTClient::onPublishedStatic);
-    MQTT_OnData(&MQTTClient::mqttClient, MQTTClient::onDataStatic);
+    MQTT_OnConnected(mqttClient, MQTTClient::onConnectedStatic);
+    MQTT_OnDisconnected(mqttClient, MQTTClient::onDisconnectedStatic);
+    MQTT_OnPublished(mqttClient, MQTTClient::onPublishedStatic);
+    MQTT_OnData(mqttClient, MQTTClient::onDataStatic);
 
-    MQTTClient::instance = this;
+    mqttClient.userData = (void*)this;
 }
 
 MQTTClient::MQTTClient(const char* device_id, const char* host, uint32_t port, uint32_t keep_alive)
@@ -76,17 +73,17 @@ void MQTTClient::onPublishedStatic(uint32_t* args)
 
 void MQTTClient::connect()
 {
-    MQTT_Connect(&MQTTClient::mqttClient);
+    MQTT_Connect(&mqttClient);
 }
 
 void MQTTClient::disconnect()
 {
-    MQTT_Disconnect(&MQTTClient::mqttClient);
+    MQTT_Disconnect(&mqttClient);
 }
 
 bool MQTTClient::subscribe(const char* topic, uint8_t qos)
 {
-    return MQTT_Subscribe(&MQTTClient::mqttClient, topic, qos);
+    return MQTT_Subscribe(&mqttClient, topic, qos);
 }
 
 bool MQTTClient::subscribe(String& topic, uint8_t qos)
@@ -96,7 +93,7 @@ bool MQTTClient::subscribe(String& topic, uint8_t qos)
 
 bool MQTTClient::publish(const char* topic, const char* payload, int data_length, uint8_t qos, uint8_t retain)
 {
-    return MQTT_Publish(&MQTTClient::mqttClient, topic, payload, data_length, qos, retain);
+    return MQTT_Publish(&mqttClient, topic, payload, data_length, qos, retain);
 }
 
 bool MQTTClient::publish(String& topic, String& payload, uint8_t qos, uint8_t retain)
@@ -106,7 +103,7 @@ bool MQTTClient::publish(String& topic, String& payload, uint8_t qos, uint8_t re
 
 void MQTTClient::setLastWillTestament(const char* topic, const char* payload, uint8_t qos, uint8_t retain)
 {
-    MQTT_InitLWT(&MQTTClient::mqttClient, topic, payload, qos, retain);
+    MQTT_InitLWT(&mqttClient, topic, payload, qos, retain);
 }
 
 void MQTTClient::setLastWillTestament(String& topic, String& payload, uint8_t qos, uint8_t retain)

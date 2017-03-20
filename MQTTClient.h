@@ -13,11 +13,11 @@ extern "C" {
     #include "mqtt/mqtt.h"
 }
 
+
 class MQTTClient
 {
 private:
-    static MQTT_Client mqttClient;
-    static MQTTClient* instance;
+    MQTT_Client mqttClient;
 
     static void onConnectedStatic(uint32_t* args);
     static void onDisconnectedStatic(uint32_t* args);
