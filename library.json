@@ -1,0 +1,13 @@
+{
+  "name": "TUANPMT ESP8266 MQTT Arduino Wrapper",
+  "keywords": "esp8266, mqtt, tuanpmt, arduino",
+  "description": "Arduino wrapper over tuanpmt's excellent MQTT library",
+  "repository":
+  {
+    "type": "git",
+    "url": "https://github.com/candale/esp_mqtt_arduino_wrapper.git"
+  },
+  "version": "1.0.0",
+  "frameworks": "arduino",
+  "platforms": "*"
+}
