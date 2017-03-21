@@ -1,4 +1,4 @@
-# Tuanmpt ESP8266 MQTT Library Arduino Wrapper
+# ESP8266 MQTT Library Arduino Wrapper (over Tuanpmt's)
 
 Simple class wrapper over esp_mqtt (https://github.com/tuanpmt/esp_mqtt). I created this in order to make use of the excellent library written by tuanmpt. The current libraries, like PubSubClient, do not support QoS level higher than 0 so this should be a bit better, if it works properly.
 
