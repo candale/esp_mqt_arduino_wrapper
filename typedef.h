@@ -14,4 +14,8 @@ typedef long I32;
 typedef unsigned long U32;
 typedef unsigned long long U64;
 
+#ifndef BOOL
+#define BOOL bool
+#endif
+
 #endif

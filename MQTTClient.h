@@ -10,7 +10,7 @@
 #include <string.h>
 
 extern "C" {
-    #include "mqtt/mqtt.h"
+    #include "mqtt.h"
 }
 
 

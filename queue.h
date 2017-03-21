@@ -32,6 +32,8 @@
 #define USER_QUEUE_H_
 #include "os_type.h"
 #include "ringbuf.h"
+#include "typedef.h"
+
 typedef struct {
   uint8_t *buf;
   RINGBUF rb;
