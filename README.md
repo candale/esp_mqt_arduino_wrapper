@@ -18,7 +18,7 @@ In order to use it, you need to create another class that derives from MQTTClien
 - onPublished
 - onData
 
-Example
+### Example
 
 ```c++
 #include <MQTTClient.h>
