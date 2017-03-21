@@ -17,3 +17,46 @@ In order to use it, you need to create another class that derives from MQTTClien
 - onDisconnected
 - onPublished
 - onData
+
+Example
+
+```c++
+#include <MQTTClient.h>
+#include <ESP8266WiFi.h>
+
+const char* ssid = "ssid";
+const char* pass = "pass";
+
+class MyClient: public MQTTClient
+{
+  using MQTTClient::MQTTClient;
+
+  void onData(String& topic, String& payload) {
+    Serial.println(topic);
+    Serial.println(payload);
+    Serial.println();
+  }
+
+  void onConnected() {
+    subscribe("#", 1);
+  }
+};
+
+MyClient* client;
+
+void setup() {
+  Serial.begin(115200);
+  Serial.println();
+
+  WiFi.begin(ssid, pass);
+  while (WiFi.waitForConnectResult() != WL_CONNECTED);
+  Serial.println("Connected to wifi");
+  
+  client = new MyClient("client-id", "host", "user", "pass", 1883, 60);
+  Serial.println("Connecting ...");
+  client->connect();
+}
+
+void loop() {
+}
+```
