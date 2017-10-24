@@ -1,4 +1,4 @@
-#define MQTT_SSL_ENABLE
+// #define MQTT_SSL_ENABLE
 #define PROTOCOL_NAMEv31
 #define MQTT_BUF_SIZE   1024
 
